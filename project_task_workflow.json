@@ -1,0 +1,34 @@
+{
+    "doctype": "Workflow",
+    "workflow_name": "Project Task Workflow",
+    "document_type": "Project Task",
+    "is_active": 1,
+    "states": [
+        {
+            "state": "Not Started",
+            "doc_status": 0
+        },
+        {
+            "state": "In Progress",
+            "doc_status": 0
+        },
+        {
+            "state": "Completed",
+            "doc_status": 1
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Not Started",
+            "action": "Start Task",
+            "next_state": "In Progress",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "In Progress",
+            "action": "Complete Task",
+            "next_state": "Completed",
+            "condition": "doc.assigned_to == frappe.session.user"
+        }
+    ]
+}
